@@ -20,6 +20,7 @@ namespace Domain
         public double TargetSavings { get; set; }
         //Target
         public bool SavingsTowardGoal { get; set; }
+        public double GoalsSavings { get; set; }
         public double EstimatedHighLoan { get; set; }
         public double EstimatedLowLoan { get; set; }
         public double GoalSavingsPerMonth { get; set; }
@@ -28,10 +29,7 @@ namespace Domain
         public  DateTime GoalsDateChecker { get; set; }
         public double EstimatedHighTotal { get; set; }
         public double EstimatedLowTotal { get; set; }
-
-
-
-
-
-}
+        public int LoanTermInYears { get; set; }
+        public double InterestRate { get; set; }
+    }
 }

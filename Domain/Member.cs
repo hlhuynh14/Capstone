@@ -20,6 +20,7 @@ namespace Domain
         public double Housing { get; set; }
         public double Utilities { get; set; }
         public double OtherBills { get; set; }
+        public double Loans { get; set; }
         public double  Food { get; set; }
         public double Entertainment { get; set; }
         public double Others { get; set; }
@@ -28,10 +29,14 @@ namespace Domain
         public double AmountForSavings { get; set; }
         public double AmountForEntertainment { get; set; }
         public double AmountForOthers { get; set; }
+        public double AmountForLoans { get; set; }
         public double MonthlyRemainder { get; set; }
+        public double PercentChecker { get; set; }
         // taxes
         public double Income { get; set; }
         public double EstimatedNetIncome { get; set; }
         public double TaxableIncome { get; set; }
+        //goals
+        
     }
 }

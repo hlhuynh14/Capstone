@@ -76,6 +76,8 @@ namespace Application
             member.AmountForFood = (member.Food * .01) * member.MonthlyRemainder;
             member.AmountForOthers = (member.Others * .01) * member.MonthlyRemainder;
             member.AmountForSavings = (member.Savings * .01) * member.MonthlyRemainder;
+            member.AmountForLoans = (member.Loans * .01) * member.MonthlyRemainder;
+            member.PercentChecker = (member.Entertainment + member.Food + member.Others + member.Savings + member.Loans);
             _context.SaveChanges();
         }
         //Goals
@@ -86,8 +88,17 @@ namespace Application
         }
         public void EstimatedGoalSavings(Goal goal)
         {
-
+            goal.EstimatedHighTotal = (goal.GoalSavingsPerMonth * goal.MonthGoals) + goal.GoalsSavings + goal.EstimatedHighLoan;
+            goal.EstimatedLowTotal = (goal.GoalSavingsPerMonth * goal.MonthGoals) + goal.GoalsSavings + goal.EstimatedLowLoan;
+            _context.SaveChanges();
         }
-        
+        public void CalculateLoan(Goal goal)
+        {
+            double highGoal = goal.SavingsPerMonth * (12 * goal.LoanTermInYears);
+            goal.EstimatedHighLoan = highGoal - (highGoal * (goal.InterestRate *.01));
+            double lowGoal = goal.SavingsPerMonth * (6 * goal.LoanTermInYears);
+            goal.EstimatedLowLoan = lowGoal - (lowGoal * (goal.InterestRate * .01));
+            _context.SaveChanges();
+        }
     }
 }
