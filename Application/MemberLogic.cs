@@ -69,7 +69,11 @@ namespace Application
         }
         public void DivideRemainder(Member member)
         {
-        
+            member.AmountForEntertainment = (member.Entertainment * .01) * member.MonthlyRemainder;
+            member.AmountForFood = (member.Food * .01) * member.MonthlyRemainder;
+            member.AmountForOthers = (member.Others * .01) * member.MonthlyRemainder;
+            member.AmountForSavings = (member.Savings * .01) * member.MonthlyRemainder;
+            _context.SaveChanges();
         }
     }
 }
