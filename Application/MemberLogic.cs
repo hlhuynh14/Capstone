@@ -14,6 +14,8 @@ namespace Application
         {
             _context = context;
         }
+
+        //Taxes
         public void GetFillingStatus(Member member)
         {
             string fillingStatus = member.FillingStatus;
@@ -62,6 +64,7 @@ namespace Application
                 _context.SaveChanges();
             }
         }
+        //Budget
         public void DeductExpenses(Member member)
         {
            member.MonthlyRemainder = member.MonthlyNetPay - member.Housing - member.OtherBills - member.Utilities;
@@ -75,5 +78,16 @@ namespace Application
             member.AmountForSavings = (member.Savings * .01) * member.MonthlyRemainder;
             _context.SaveChanges();
         }
+        //Goals
+        public void EstimateSavings(Goal goal)
+        {
+            goal.SavingsEstimated = goal.CurrentSavings + (goal.SavingsPerMonth * goal.Months);
+            _context.SaveChanges();
+        }
+        public void EstimatedGoalSavings(Goal goal)
+        {
+
+        }
+        
     }
 }
