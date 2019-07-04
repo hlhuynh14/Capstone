@@ -73,7 +73,7 @@ namespace Capstone.Controllers
             }
 
             // GET: Member/Edit/5
-            public ActionResult Edit(int id)
+            public ActionResult Update(Member member)
             {
                 return View();
             }
@@ -95,28 +95,6 @@ namespace Capstone.Controllers
                 }
             }
 
-            // GET: Member/Delete/5
-            public ActionResult Delete(int id)
-            {
-                return View();
-            }
-
-            // POST: Member/Delete/5
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public ActionResult Delete(int id, IFormCollection collection)
-            {
-                try
-                {
-                    // TODO: Add delete logic here
-
-                    return RedirectToAction(nameof(Index));
-                }
-                catch
-                {
-                    return View();
-                }
-            }
         public Member GetLoggedInMember()
         {
             var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);

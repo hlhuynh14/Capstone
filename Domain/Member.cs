@@ -14,7 +14,9 @@ namespace Domain
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string StateAbbreviation { get; set; }
+        public List<Budget> BudgetList { get; set; }
+        public List<Goal> GoalList { get; set; }
+        public List<Tax> TaxList { get; set; }
         //User
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

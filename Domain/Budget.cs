@@ -13,6 +13,7 @@ namespace Domain
         public double RemainderAfterBill { get; set; }
         public double percent { get; set; }
         public double RemainderAfterExpenses { get; set; }
+        public bool Primary { get; set; }
         //Bill
         [ForeignKey("Bill")]
         public int BillId { get; set; }
@@ -23,7 +24,7 @@ namespace Domain
         public Goal Goal { get; set; }
         //Expense 
         [ForeignKey("Expense")]
-        public string ExpenseId { get; set; }
+        public int ExpenseId { get; set; }
         public Expense Expense { get; set; }
     }
 }
