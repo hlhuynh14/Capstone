@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Domain
 {
-    public class IActionResult 
+    public class Member
     {
         //account
         [Key]
@@ -15,32 +15,20 @@ namespace Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string StateAbbreviation { get; set; }
-        public string FillingStatus { get; set; }
+        //User
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-        // budget
-        public double MonthlyNetPay { get; set; }
-        public double OtherIncome { get; set; }
-        public double Housing { get; set; }
-        public double Utilities { get; set; }
-        public double OtherBills { get; set; }
-        public double Loans { get; set; }
-        public double  Food { get; set; }
-        public double Entertainment { get; set; }
-        public double Others { get; set; }
-        public double Savings { get; set; }
-        public double AmountForFood { get; set; }
-        public double AmountForSavings { get; set; }
-        public double AmountForEntertainment { get; set; }
-        public double AmountForOthers { get; set; }
-        public double AmountForLoans { get; set; }
-        public double MonthlyRemainder { get; set; }
-        public double PercentChecker { get; set; }
+        //Budget
+        [ForeignKey("Budget")]
+        public int BudgetId { get; set; }
+        public Budget Budget { get; set; }
         // taxes
-        public double Income { get; set; }
-        public double EstimatedNetIncome { get; set; }
-        public double TaxableIncome { get; set; }
+        [ForeignKey("Tax")]
+        public int TaxId { get; set; }
+        public Tax Tax { get; set; }
+
+
 
     }
 }

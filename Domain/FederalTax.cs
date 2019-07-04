@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain
 {
-    public class FederalTaxes
+    public class FederalTax
     {
         
     }

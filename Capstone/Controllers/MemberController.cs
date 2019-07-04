@@ -26,7 +26,7 @@ namespace Capstone.Controllers
           
         }
         // GET: Member
-        public async Task<Microsoft.AspNetCore.Mvc.IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
 
             var loggedInMember = GetLoggedInMember();
@@ -36,8 +36,6 @@ namespace Capstone.Controllers
             }
             else
             {
-               
-               
                 return View(loggedInMember);
             }
         }
@@ -49,16 +47,16 @@ namespace Capstone.Controllers
             }
 
             // GET: Member/Create
-            public async Task<Microsoft.AspNetCore.Mvc.IActionResult> Create()
+            public async Task<IActionResult> Create()
             {
-            Domain.IActionResult member = new Domain.IActionResult();
+            Member member = new Member();
                 return View(member);
             }
 
             // POST: Member/Create
             [HttpPost]
             [ValidateAntiForgeryToken]
-            public async Task<Microsoft.AspNetCore.Mvc.IActionResult> Create([Bind("Name")] Domain.IActionResult member)
+            public async Task<IActionResult> Create(Member member)
             {
                 try
                 {

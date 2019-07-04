@@ -23,69 +23,88 @@ namespace Application
             _userManager = userManager;
         }
         //Taxes
-        public void GetFillingStatus(IActionResult member)
+        public void GetFillingStatus(Tax tax)
         {
-            string fillingStatus = member.FillingStatus;
+            
+            string fillingStatus = tax.FillingStatus;
             double single = 12000;
             double married = 24000;
-            double marriedSeparately = 12200;
+            double marriedSeparately = 12000;
             double headOfHouseHold = 18000;
 
             switch (fillingStatus)
             {
                 case "Single":
                     {
-                        CalculateTaxableIncome(member, single);
+                        CalculateTaxableIncome(tax, single);
                         break;
                     }
                 case "Married":
                     {
-                        CalculateTaxableIncome(member, married);
+                        CalculateTaxableIncome(tax, married);
                         break;
                     }
                 case "Married Filling Separately":
                     {
-                        CalculateTaxableIncome(member, marriedSeparately);
+                        CalculateTaxableIncome(tax, marriedSeparately);
                         break;
                     }
                 case "Head Of Household":
                     {
-                        CalculateTaxableIncome(member, headOfHouseHold);
+                        CalculateTaxableIncome(tax, headOfHouseHold);
                         break;
                     }
                 default:
                     break;
             }
         }
-        public void CalculateTaxableIncome(IActionResult member, double deductions)
+        public void CalculateTaxableIncome(Tax tax, double deductions)
         {
-            
-            if (member.FillingStatus != "Married")
-            {
-                member.TaxableIncome = member.Income - deductions;
+                tax.TaxableIncome = tax.GrossIncome - deductions;
                 _context.SaveChanges();
+        }
+        //Budget
+        public void DeductBills(Budget budget)
+        {
+            var billList = _context.Bills.ToList();
+            double billTotal = 0;
+            foreach ( var item in billList)
+            {
+                billTotal += item.Amount;
+            }
+            
+            budget.RemainderAfterBill = budget.TotalMonthlyNetIncome - billTotal;
+            _context.SaveChanges();
+        }
+        public void DivideRemainder(Budget budget)
+        {
+            budget.percent = 1;
+            var ExpenseList = _context.Expenses.ToList();
+            foreach (var item in ExpenseList)
+            {
+                item.Amount = (item.Percent * .01) * budget.RemainderAfterBill;
+               budget.percent =  budget.percent - (item.Percent * .01);
+            }
+            budget.RemainderAfterExpenses = budget.percent * budget.RemainderAfterBill;
+            _context.SaveChanges();
+        }
+        public bool CheckPercent()
+        {
+            var ExpenseList = _context.Expenses.ToList();
+            double CurrentPercent = 0;
+            foreach (var item in ExpenseList)
+            {
+                CurrentPercent += (item.Percent * .01);
+            }
+
+            if (CurrentPercent > 1)
+            {
+                return true;
             }
             else
             {
-                member.TaxableIncome = member.Income + member.OtherIncome - deductions;
-                _context.SaveChanges();
+                return false;
             }
-        }
-        //Budget
-        public void DeductExpenses(IActionResult member)
-        {
-           member.MonthlyRemainder = member.MonthlyNetPay - member.Housing - member.OtherBills - member.Utilities;
-            _context.SaveChanges();
-        }
-        public void DivideRemainder(IActionResult member)
-        {
-            member.AmountForEntertainment = (member.Entertainment * .01) * member.MonthlyRemainder;
-            member.AmountForFood = (member.Food * .01) * member.MonthlyRemainder;
-            member.AmountForOthers = (member.Others * .01) * member.MonthlyRemainder;
-            member.AmountForSavings = (member.Savings * .01) * member.MonthlyRemainder;
-            member.AmountForLoans = (member.Loans * .01) * member.MonthlyRemainder;
-            member.PercentChecker = (member.Entertainment + member.Food + member.Others + member.Savings + member.Loans);
-            _context.SaveChanges();
         }
         //Goals
         public void EstimateSavings(Goal goal)

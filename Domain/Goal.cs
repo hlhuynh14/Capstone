@@ -11,10 +11,10 @@ namespace Domain
         [Key]
         public int ID { get; set; }
         //savings
+        public string Name { get; set; }
         public bool Savings { get; set; }
         public double CurrentSavings { get; set; }
         public double SavingsPerMonth { get; set; }
-        public string Name { get; set; }
         public int Months { get; set; }
         public DateTime DateChecker { get; set; }
         public double SavingsEstimated { get; set; }
@@ -33,8 +33,6 @@ namespace Domain
         public int LoanTermInYears { get; set; }
         public double InterestRate { get; set; }
         //Person
-        [ForeignKey("Member")]
-        public int MemberId { get; set; }
-        public IActionResult member { get; set; }
+
     }
 }

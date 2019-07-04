@@ -1,4 +1,4 @@
-﻿@model Domain.IActionResult
+﻿@model Domain.Member
 
 @{
     ViewData["Title"] = "Create";
@@ -23,17 +23,6 @@
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="StateAbbreviation" class="control-label"></label>
-                <input asp-for="StateAbbreviation" class="form-control" />
-                <span asp-validation-for="StateAbbreviation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FillingStatus" class="control-label"></label>
-                <input asp-for="FillingStatus" class="form-control" />
-                <span asp-validation-for="FillingStatus" class="text-danger"></span>
-            </div>
-           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
