@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Domain
@@ -31,5 +32,9 @@ namespace Domain
         public double EstimatedLowTotal { get; set; }
         public int LoanTermInYears { get; set; }
         public double InterestRate { get; set; }
+        //Person
+        [ForeignKey("Member")]
+        public int MemberId { get; set; }
+        public IActionResult member { get; set; }
     }
 }

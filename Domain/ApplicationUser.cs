@@ -6,7 +6,7 @@ namespace Domain
 {
     public class ApplicationUser : IdentityUser
     {
-        public string RoleString = "Member";
+        
     }
 
 }

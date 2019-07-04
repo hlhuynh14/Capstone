@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "eeeb23eacb343fae9730af9b33872d1bcbcd23b0"
+    "signature": "959e4509adb5f86048776801326d8bb628b94efc"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,36 +9,12 @@
       "Infrastructure/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0",
-          "Microsoft.AspNet.Providers.Core": "2.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.1.1",
           "Microsoft.EntityFrameworkCore": "2.1.11",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.11"
         },
         "runtime": {
           "Infrastructure.dll": {}
-        }
-      },
-      "EntityFramework/6.0.0": {
-        "runtime": {
-          "lib/net45/EntityFramework.SqlServer.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.20911.0"
-          },
-          "lib/net45/EntityFramework.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.20911.0"
-          }
-        }
-      },
-      "Microsoft.AspNet.Providers.Core/2.0.0": {
-        "dependencies": {
-          "EntityFramework": "6.0.0"
-        },
-        "runtime": {
-          "lib/net40/System.Web.Providers.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.21122.0"
-          }
         }
       },
       "Microsoft.AspNetCore.Authentication/2.1.1": {
@@ -909,20 +885,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "EntityFramework/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-y6lX/VMghGBV6TvgQS4Q2WK6kAcOoyD+TQxObN9utd0JsMMdMxyqARxKbvgi7KEIbQ8osZ4ZvImaly7l3NDFDw==",
-      "path": "entityframework/6.0.0",
-      "hashPath": "entityframework.6.0.0.nupkg.sha512"
-    },
-    "Microsoft.AspNet.Providers.Core/2.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-JMk31PExMANVDc04aSUyIlcL3pkFVyNg/dDn+ZZzmhZ2CBctI90BWQH1L0zXgD61ZWW5r4ybInV362sRKWIC+A==",
-      "path": "microsoft.aspnet.providers.core/2.0.0",
-      "hashPath": "microsoft.aspnet.providers.core.2.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication/2.1.1": {
       "type": "package",

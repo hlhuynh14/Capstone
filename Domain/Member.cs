@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Domain
 {
-    public class Member
+    public class IActionResult 
     {
         //account
         [Key]
@@ -14,6 +16,9 @@ namespace Domain
         public string LastName { get; set; }
         public string StateAbbreviation { get; set; }
         public string FillingStatus { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         // budget
         public double MonthlyNetPay { get; set; }
         public double OtherIncome { get; set; }
@@ -36,7 +41,6 @@ namespace Domain
         public double Income { get; set; }
         public double EstimatedNetIncome { get; set; }
         public double TaxableIncome { get; set; }
-        //goals
-        
+
     }
 }

@@ -1,7 +1,13 @@
 ﻿using Domain;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Application
 {
@@ -9,20 +15,21 @@ namespace Application
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
+        
 
-        public MemberLogic(ApplicationDbContext context)
+        public MemberLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-
         //Taxes
-        public void GetFillingStatus(Member member)
+        public void GetFillingStatus(IActionResult member)
         {
             string fillingStatus = member.FillingStatus;
-            double single = 12200;
-            double married = 24400;
+            double single = 12000;
+            double married = 24000;
             double marriedSeparately = 12200;
-            double headOfHouseHold = 18350;
+            double headOfHouseHold = 18000;
 
             switch (fillingStatus)
             {
@@ -50,7 +57,7 @@ namespace Application
                     break;
             }
         }
-        public void CalculateTaxableIncome(Member member, double deductions)
+        public void CalculateTaxableIncome(IActionResult member, double deductions)
         {
             
             if (member.FillingStatus != "Married")
@@ -65,12 +72,12 @@ namespace Application
             }
         }
         //Budget
-        public void DeductExpenses(Member member)
+        public void DeductExpenses(IActionResult member)
         {
            member.MonthlyRemainder = member.MonthlyNetPay - member.Housing - member.OtherBills - member.Utilities;
             _context.SaveChanges();
         }
-        public void DivideRemainder(Member member)
+        public void DivideRemainder(IActionResult member)
         {
             member.AmountForEntertainment = (member.Entertainment * .01) * member.MonthlyRemainder;
             member.AmountForFood = (member.Food * .01) * member.MonthlyRemainder;
