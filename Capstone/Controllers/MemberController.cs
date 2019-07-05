@@ -129,13 +129,105 @@ namespace Capstone.Controllers
         }
         public async Task<IActionResult> SeeBudget(int id)
         {
-            Budget budget = _context.Budgets.Where(c => c.Id == id).Single();
+            Budget budget = _context.Budgets.Where(c => c.MemberId == id).Single();
             budget.BillList = _context.Bills.ToList();
             budget.GoalList = _context.Goals.ToList();
             budget.ExpenseList = _context.Expenses.ToList();
             budget.IncomeList = _context.Incomes.ToList();
             await _context.SaveChangesAsync();
             return View(budget);
+        }
+        public IActionResult CreateIncome(int id)
+        {
+            Income income = new Income();
+            return View(income);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateIncome(int id, Income income)
+        {
+            income.Id = 0;
+            income.BudgetId = id;
+            _context.Incomes.Add(income);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> UpdateIncome(int id, Income oldIncome)
+        {
+            Income income = _context.Incomes.Where(c => c.Id == id).Single();
+            income = oldIncome;
+            int budgetId = income.BudgetId.Value;
+            _context.SaveChanges();
+            return RedirectToAction("SeeBudget", new { budgetId });
+        }
+        public IActionResult CreateBill(int id)
+        {
+            Bill bill = new Bill();
+            return View(bill);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateBill(int id, Bill bill)
+        {
+            bill.Id = 0;
+            bill.BudgetId = id;
+            _context.Bills.Add(bill);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> UpdateBill(int id, Bill oldbill)
+        {
+            Bill bill = _context.Bills.Where(c => c.Id == id).Single();
+            bill = oldbill;
+            int budgetId = bill.BudgetId.Value;
+            _context.SaveChanges();
+            return RedirectToAction("SeeBudget", new { budgetId });
+        }
+        public IActionResult CreateGoal(int id)
+        {
+            Goal goal= new Goal();
+            return View(goal);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateGoal(int id, Goal goal)
+        {
+            goal.Id = 0;
+            goal.BudgetId = id;
+            _context.Goals.Add(goal);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> UpdateGoal(int id, Goal oldGoal)
+        {
+            Goal goal = _context.Goals.Where(c => c.Id == id).Single();
+            goal = oldGoal;
+            int budgetId = goal.BudgetId.Value;
+            _context.SaveChanges();
+            return RedirectToAction("SeeBudget", new { budgetId });
+        }
+        public IActionResult CreateExpense(int id)
+        {
+            Expense expense = new Expense();
+            return View(expense);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateExpense(int id, Expense expense)
+        {
+            expense.Id = 0;
+            expense.BudgetId = id;
+            _context.Expenses.Add(expense);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> UpdateExpense(int id, Expense oldexpense)
+        {
+           Expense expense = _context.Expenses.Where(c => c.Id == id).Single();
+            expense = oldexpense;
+            int budgetId = expense.BudgetId.Value;
+            _context.SaveChanges();
+            return RedirectToAction("SeeBudget", new { budgetId });
         }
         public async Task<IActionResult> Calculate(int id)
         {
@@ -144,9 +236,7 @@ namespace Capstone.Controllers
             _memberService.DeductBills(budget);
             _memberService.DeductGoals(budget);
             _memberService.DivideRemainder(budget);
-            return RedirectToAction("SeeBudget", new {id});
+            return RedirectToAction("SeeBudget", new { id });
         }
-
-
     }
 }

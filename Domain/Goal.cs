@@ -9,7 +9,7 @@ namespace Domain
     public class Goal
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         //savings
         public string Name { get; set; }
         public bool Savings { get; set; }

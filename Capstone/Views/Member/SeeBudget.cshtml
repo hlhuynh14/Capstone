@@ -10,46 +10,148 @@
 <div>
     <h4>Budget</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <div>
+        <table class="table">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalMonthlyNetIncome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TotalMonthlyNetIncome)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RemainderAfterBill)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RemainderAfterBill)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RemainderAfterGoals)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RemainderAfterGoals)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Percent)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Percent)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.RemainderAfterExpenses)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RemainderAfterExpenses)
-        </dd>
-    </dl>
+
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model.IncomeList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update Income", "UpdateIncome", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+    </div>
+    <div>
+        <table class="table">
+
+
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model.IncomeList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update Income", "UpdateIncome", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+    </div>
+    <div>
+        <table class="table">
+
+
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model.IncomeList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update Income", "UpdateIncome", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+    </div>
+    <div>
+        <table class="table">
+
+
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ExpenseList)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Update Income", "UpdateIncome", new { id = item.Id })
+            </td>
+        </tr>
+            }
+
+        </table>
+        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+    </div>
+
 </div>
+  
 <div>
     <a asp-action="Calculate" asp-route-id="@Model.Id">Calculate</a>
 </div>
