@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Domain
@@ -14,6 +15,10 @@ namespace Domain
         public double EstimatedNetIncome { get; set; }
         public double MedicareTax { get; set; }
         public double SocialSecurityTax { get; set; }
-        public bool Primary { get; set; }
+
+        [ForeignKey("Member")]
+        public int? MemberId { get; set; }
+        public Member member{ get; set; }
+
     }
 }

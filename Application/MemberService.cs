@@ -11,13 +11,13 @@ using System.Collections.Generic;
 
 namespace Application
 {
-    public class MemberLogic
+    public class MemberService : IMemberService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
         
 
-        public MemberLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public MemberService(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -64,6 +64,14 @@ namespace Application
                 _context.SaveChanges();
         }
         //Budget
+        public void GetNetIncome(Budget budget)
+        {
+            var IncomeList = _context.Incomes.ToList();
+            foreach(var item in IncomeList)
+            {
+                budget.TotalMonthlyNetIncome += item.Amount;
+            }
+        }
         public void DeductBills(Budget budget)
         {
             var billList = _context.Bills.ToList();
@@ -78,14 +86,14 @@ namespace Application
         }
         public void DivideRemainder(Budget budget)
         {
-            budget.percent = 1;
+            budget.Percent = 1;
             var ExpenseList = _context.Expenses.ToList();
             foreach (var item in ExpenseList)
             {
                 item.Amount = (item.Percent * .01) * budget.RemainderAfterBill;
-               budget.percent =  budget.percent - (item.Percent * .01);
+               budget.Percent =  budget.Percent - (item.Percent * .01);
             }
-            budget.RemainderAfterExpenses = budget.percent * budget.RemainderAfterBill;
+            budget.RemainderAfterExpenses = budget.Percent * budget.RemainderAfterBill;
             _context.SaveChanges();
         }
         public bool CheckPercent()

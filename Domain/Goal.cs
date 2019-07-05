@@ -32,7 +32,10 @@ namespace Domain
         public double EstimatedLowTotal { get; set; }
         public int LoanTermInYears { get; set; }
         public double InterestRate { get; set; }
-        //Person
+        //Budget
+        [ForeignKey("Budget")]
+        public int? BudgetId { get; set; }
+        public Budget Budget { get; set; }
 
     }
 }

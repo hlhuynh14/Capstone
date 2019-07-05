@@ -19,6 +19,7 @@ namespace Infrastructure.Data
         public DbSet<FederalTax> FederalTaxes { get; set; }
         public DbSet<FillingStatuses> FillingStatuses { get; set; }
         public DbSet<Goal> Goals { get; set; }
+        public DbSet<Income> Incomes { get; set; }
         public DbSet<Member> Members{ get; set; }
         public DbSet<Tax> Taxes { get; set; }
 

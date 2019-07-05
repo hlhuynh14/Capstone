@@ -78,9 +78,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Amount");
 
+                    b.Property<int?>("BudgetId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
 
                     b.ToTable("Bills");
                 });
@@ -91,27 +95,23 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BillId");
+                    b.Property<int?>("MemberId");
 
-                    b.Property<int>("ExpenseId");
+                    b.Property<string>("Name");
 
-                    b.Property<int>("GoalId");
+                    b.Property<double>("Percent");
 
                     b.Property<double>("RemainderAfterBill");
 
                     b.Property<double>("RemainderAfterExpenses");
 
-                    b.Property<double>("TotalMonthlyNetIncome");
+                    b.Property<double>("RemainderAfterGoals");
 
-                    b.Property<double>("percent");
+                    b.Property<double>("TotalMonthlyNetIncome");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BillId");
-
-                    b.HasIndex("ExpenseId");
-
-                    b.HasIndex("GoalId");
+                    b.HasIndex("MemberId");
 
                     b.ToTable("Budgets");
                 });
@@ -124,11 +124,15 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Amount");
 
+                    b.Property<int?>("BudgetId");
+
                     b.Property<string>("Name");
 
                     b.Property<double>("Percent");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BudgetId");
 
                     b.ToTable("Expenses");
                 });
@@ -170,6 +174,8 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BudgetId");
 
                     b.Property<double>("CurrentSavings");
 
@@ -213,7 +219,28 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("BudgetId");
+
                     b.ToTable("Goals");
+                });
+
+            modelBuilder.Entity("Domain.Income", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Amount");
+
+                    b.Property<int?>("BudgetId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("BudgetId");
+
+                    b.ToTable("Incomes");
                 });
 
             modelBuilder.Entity("Domain.Member", b =>
@@ -224,23 +251,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ApplicationId");
 
-                    b.Property<int>("BudgetId");
-
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
 
-                    b.Property<string>("StateAbbreviation");
-
-                    b.Property<int>("TaxId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationId");
-
-                    b.HasIndex("BudgetId");
-
-                    b.HasIndex("TaxId");
 
                     b.ToTable("Members");
                 });
@@ -259,11 +276,17 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("MedicareTax");
 
+                    b.Property<int?>("MemberId");
+
                     b.Property<double>("SocialSecurityTax");
+
+                    b.Property<string>("StateAbbrevation");
 
                     b.Property<double>("TaxableIncome");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MemberId");
 
                     b.ToTable("Taxes");
                 });
@@ -400,22 +423,39 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("ApplicationRole");
                 });
 
+            modelBuilder.Entity("Domain.Bill", b =>
+                {
+                    b.HasOne("Domain.Budget", "Budget")
+                        .WithMany("BillList")
+                        .HasForeignKey("BudgetId");
+                });
+
             modelBuilder.Entity("Domain.Budget", b =>
                 {
-                    b.HasOne("Domain.Bill", "Bill")
-                        .WithMany()
-                        .HasForeignKey("BillId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Domain.Member", "member")
+                        .WithMany("BudgetList")
+                        .HasForeignKey("MemberId");
+                });
 
-                    b.HasOne("Domain.Expense", "Expense")
-                        .WithMany()
-                        .HasForeignKey("ExpenseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("Domain.Expense", b =>
+                {
+                    b.HasOne("Domain.Budget", "Budget")
+                        .WithMany("ExpenseList")
+                        .HasForeignKey("BudgetId");
+                });
 
-                    b.HasOne("Domain.Goal", "Goal")
-                        .WithMany()
-                        .HasForeignKey("GoalId")
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("Domain.Goal", b =>
+                {
+                    b.HasOne("Domain.Budget", "Budget")
+                        .WithMany("GoalList")
+                        .HasForeignKey("BudgetId");
+                });
+
+            modelBuilder.Entity("Domain.Income", b =>
+                {
+                    b.HasOne("Domain.Budget", "Budget")
+                        .WithMany("IncomeList")
+                        .HasForeignKey("BudgetId");
                 });
 
             modelBuilder.Entity("Domain.Member", b =>
@@ -423,16 +463,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationId");
+                });
 
-                    b.HasOne("Domain.Budget", "Budget")
-                        .WithMany()
-                        .HasForeignKey("BudgetId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Tax", "Tax")
-                        .WithMany()
-                        .HasForeignKey("TaxId")
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("Domain.Tax", b =>
+                {
+                    b.HasOne("Domain.Member", "member")
+                        .WithMany("TaxList")
+                        .HasForeignKey("MemberId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

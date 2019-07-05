@@ -71,4 +71,11 @@ C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netc
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\Index.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Shared\MemberLayout.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\Update.g.cshtml.cs
 C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\Create.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\CreateGoals.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\UpdateGoals.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\SeeBudget.g.cshtml.cs
+C:\Users\hlhuynh14\Desktop\devCodeCamp Projects\Capstone\Capstone\obj\Debug\netcoreapp2.1\Razor\Views\Member\CreateBudget.g.cshtml.cs

@@ -9,22 +9,23 @@ namespace Domain
     public class Budget
     {   [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
+        //Member
+        [ForeignKey("Member")]
+        public int? MemberId { get; set; }
+        public Member member { get; set; }
+        //Income
+        public List<Income> IncomeList { get; set; }
         public double TotalMonthlyNetIncome { get; set; }
-        public double RemainderAfterBill { get; set; }
-        public double percent { get; set; }
-        public double RemainderAfterExpenses { get; set; }
-        public bool Primary { get; set; }
         //Bill
-        [ForeignKey("Bill")]
-        public int BillId { get; set; }
-        public Bill Bill { get; set; }
+        public List<Bill> BillList { get; set; }
+        public double RemainderAfterBill { get; set; }
         //Goal
-        [ForeignKey("Goal")]
-        public int GoalId { get; set; }
-        public Goal Goal { get; set; }
+        public List<Goal> GoalList { get; set; }
+        public double RemainderAfterGoals { get; set; }
         //Expense 
-        [ForeignKey("Expense")]
-        public int ExpenseId { get; set; }
-        public Expense Expense { get; set; }
+        public List<Expense> ExpenseList { get; set; }
+        public double Percent { get; set; }
+        public double RemainderAfterExpenses { get; set; }
     }
 }

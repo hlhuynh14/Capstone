@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class addtables : Migration
+    public partial class addtable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,35 +51,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Amount = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bills", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Expenses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Percent = table.Column<double>(nullable: false),
-                    Amount = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Expenses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "FederalTaxes",
                 columns: table => new
                 {
@@ -106,56 +77,6 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FillingStatuses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Goals",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Savings = table.Column<bool>(nullable: false),
-                    CurrentSavings = table.Column<double>(nullable: false),
-                    SavingsPerMonth = table.Column<double>(nullable: false),
-                    Months = table.Column<int>(nullable: false),
-                    DateChecker = table.Column<DateTime>(nullable: false),
-                    SavingsEstimated = table.Column<double>(nullable: false),
-                    TargetSavings = table.Column<double>(nullable: false),
-                    SavingsTowardGoal = table.Column<bool>(nullable: false),
-                    GoalsSavings = table.Column<double>(nullable: false),
-                    EstimatedHighLoan = table.Column<double>(nullable: false),
-                    EstimatedLowLoan = table.Column<double>(nullable: false),
-                    GoalSavingsPerMonth = table.Column<double>(nullable: false),
-                    MonthGoals = table.Column<int>(nullable: false),
-                    GoalsName = table.Column<string>(nullable: true),
-                    GoalsDateChecker = table.Column<DateTime>(nullable: false),
-                    EstimatedHighTotal = table.Column<double>(nullable: false),
-                    EstimatedLowTotal = table.Column<double>(nullable: false),
-                    LoanTermInYears = table.Column<int>(nullable: false),
-                    InterestRate = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Goals", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Taxes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FillingStatus = table.Column<string>(nullable: true),
-                    GrossIncome = table.Column<double>(nullable: false),
-                    TaxableIncome = table.Column<double>(nullable: false),
-                    EstimatedNetIncome = table.Column<double>(nullable: false),
-                    MedicareTax = table.Column<double>(nullable: false),
-                    SocialSecurityTax = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Taxes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,43 +186,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Budgets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TotalMonthlyNetIncome = table.Column<double>(nullable: false),
-                    RemainderAfterBill = table.Column<double>(nullable: false),
-                    percent = table.Column<double>(nullable: false),
-                    RemainderAfterExpenses = table.Column<double>(nullable: false),
-                    BillId = table.Column<int>(nullable: false),
-                    GoalId = table.Column<int>(nullable: false),
-                    ExpenseId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Budgets", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Budgets_Bills_BillId",
-                        column: x => x.BillId,
-                        principalTable: "Bills",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Budgets_Expenses_ExpenseId",
-                        column: x => x.ExpenseId,
-                        principalTable: "Expenses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Budgets_Goals_GoalId",
-                        column: x => x.GoalId,
-                        principalTable: "Goals",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Members",
                 columns: table => new
                 {
@@ -309,10 +193,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    StateAbbreviation = table.Column<string>(nullable: true),
-                    ApplicationId = table.Column<string>(nullable: true),
-                    BudgetId = table.Column<int>(nullable: false),
-                    TaxId = table.Column<int>(nullable: false)
+                    ApplicationId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -323,18 +204,160 @@ namespace Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Budgets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    MemberId = table.Column<int>(nullable: true),
+                    TotalMonthlyNetIncome = table.Column<double>(nullable: false),
+                    RemainderAfterBill = table.Column<double>(nullable: false),
+                    RemainderAfterGoals = table.Column<double>(nullable: false),
+                    Percent = table.Column<double>(nullable: false),
+                    RemainderAfterExpenses = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Budgets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Members_Budgets_BudgetId",
+                        name: "FK_Budgets_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Taxes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FillingStatus = table.Column<string>(nullable: true),
+                    GrossIncome = table.Column<double>(nullable: false),
+                    TaxableIncome = table.Column<double>(nullable: false),
+                    StateAbbrevation = table.Column<string>(nullable: true),
+                    EstimatedNetIncome = table.Column<double>(nullable: false),
+                    MedicareTax = table.Column<double>(nullable: false),
+                    SocialSecurityTax = table.Column<double>(nullable: false),
+                    MemberId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Taxes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Taxes_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Amount = table.Column<double>(nullable: false),
+                    BudgetId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bills_Budgets_BudgetId",
                         column: x => x.BudgetId,
                         principalTable: "Budgets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Expenses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Percent = table.Column<double>(nullable: false),
+                    Amount = table.Column<double>(nullable: false),
+                    BudgetId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Expenses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Members_Taxes_TaxId",
-                        column: x => x.TaxId,
-                        principalTable: "Taxes",
+                        name: "FK_Expenses_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Goals",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Savings = table.Column<bool>(nullable: false),
+                    CurrentSavings = table.Column<double>(nullable: false),
+                    SavingsPerMonth = table.Column<double>(nullable: false),
+                    Months = table.Column<int>(nullable: false),
+                    DateChecker = table.Column<DateTime>(nullable: false),
+                    SavingsEstimated = table.Column<double>(nullable: false),
+                    TargetSavings = table.Column<double>(nullable: false),
+                    SavingsTowardGoal = table.Column<bool>(nullable: false),
+                    GoalsSavings = table.Column<double>(nullable: false),
+                    EstimatedHighLoan = table.Column<double>(nullable: false),
+                    EstimatedLowLoan = table.Column<double>(nullable: false),
+                    GoalSavingsPerMonth = table.Column<double>(nullable: false),
+                    MonthGoals = table.Column<int>(nullable: false),
+                    GoalsName = table.Column<string>(nullable: true),
+                    GoalsDateChecker = table.Column<DateTime>(nullable: false),
+                    EstimatedHighTotal = table.Column<double>(nullable: false),
+                    EstimatedLowTotal = table.Column<double>(nullable: false),
+                    LoanTermInYears = table.Column<int>(nullable: false),
+                    InterestRate = table.Column<double>(nullable: false),
+                    BudgetId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Goals", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Goals_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Incomes",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Amount = table.Column<double>(nullable: false),
+                    BudgetId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Incomes", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Incomes_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -377,19 +400,29 @@ namespace Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Budgets_BillId",
-                table: "Budgets",
-                column: "BillId");
+                name: "IX_Bills_BudgetId",
+                table: "Bills",
+                column: "BudgetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Budgets_ExpenseId",
+                name: "IX_Budgets_MemberId",
                 table: "Budgets",
-                column: "ExpenseId");
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Budgets_GoalId",
-                table: "Budgets",
-                column: "GoalId");
+                name: "IX_Expenses_BudgetId",
+                table: "Expenses",
+                column: "BudgetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Goals_BudgetId",
+                table: "Goals",
+                column: "BudgetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Incomes_BudgetId",
+                table: "Incomes",
+                column: "BudgetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Members_ApplicationId",
@@ -397,14 +430,9 @@ namespace Infrastructure.Migrations
                 column: "ApplicationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_BudgetId",
-                table: "Members",
-                column: "BudgetId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Members_TaxId",
-                table: "Members",
-                column: "TaxId");
+                name: "IX_Taxes_MemberId",
+                table: "Taxes",
+                column: "MemberId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -425,34 +453,37 @@ namespace Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "FederalTaxes");
-
-            migrationBuilder.DropTable(
-                name: "FillingStatuses");
-
-            migrationBuilder.DropTable(
-                name: "Members");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Budgets");
-
-            migrationBuilder.DropTable(
-                name: "Taxes");
-
-            migrationBuilder.DropTable(
                 name: "Bills");
 
             migrationBuilder.DropTable(
                 name: "Expenses");
 
             migrationBuilder.DropTable(
+                name: "FederalTaxes");
+
+            migrationBuilder.DropTable(
+                name: "FillingStatuses");
+
+            migrationBuilder.DropTable(
                 name: "Goals");
+
+            migrationBuilder.DropTable(
+                name: "Incomes");
+
+            migrationBuilder.DropTable(
+                name: "Taxes");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Budgets");
+
+            migrationBuilder.DropTable(
+                name: "Members");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application;
 using Domain;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +38,7 @@ namespace Capstone
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-        Configuration.GetConnectionString("DefaultConnection")));
+                Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(
                 options => options.Stores.MaxLengthForKeys = 128)
@@ -46,6 +47,7 @@ namespace Capstone
                 .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IMemberService, MemberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
