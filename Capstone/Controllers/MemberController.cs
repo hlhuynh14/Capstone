@@ -37,7 +37,7 @@ namespace Capstone.Controllers
             {
                 loggedInMember.BudgetList = _context.Budgets.ToList();
                 await _context.SaveChangesAsync();
-                if (loggedInMember.BudgetList == null)
+                if (loggedInMember.BudgetList.Count == 0)
                 {
                     int id = loggedInMember.Id;
                     return RedirectToAction("CreateBudget", new {id});
@@ -130,7 +130,23 @@ namespace Capstone.Controllers
         public async Task<IActionResult> SeeBudget(int id)
         {
             Budget budget = _context.Budgets.Where(c => c.Id == id).Single();
+            budget.BillList = _context.Bills.ToList();
+            budget.GoalList = _context.Goals.ToList();
+            budget.ExpenseList = _context.Expenses.ToList();
+            budget.IncomeList = _context.Incomes.ToList();
+            await _context.SaveChangesAsync();
             return View(budget);
         }
+        public async Task<IActionResult> Calculate(int id)
+        {
+            Budget budget = _context.Budgets.Where(c => c.Id == id).Single();
+            _memberService.GetNetIncome(budget);
+            _memberService.DeductBills(budget);
+            _memberService.DeductGoals(budget);
+            _memberService.DivideRemainder(budget);
+            return RedirectToAction("SeeBudget", new {id});
+        }
+
+
     }
 }

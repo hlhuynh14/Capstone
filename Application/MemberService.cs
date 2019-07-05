@@ -84,6 +84,24 @@ namespace Application
             budget.RemainderAfterBill = budget.TotalMonthlyNetIncome - billTotal;
             _context.SaveChanges();
         }
+        public void DeductGoals(Budget budget)
+        {
+            var goalList = _context.Goals.ToList();
+            double goalTotal = 0;
+            foreach(var item in goalList)
+            {
+                if (item.Savings == true)
+                {
+                    goalTotal += item.SavingsPerMonth;
+                }
+                else
+                {
+                    goalTotal += item.GoalSavingsPerMonth;
+                }
+                budget.RemainderAfterGoals = budget.RemainderAfterBill - goalTotal;
+                _context.SaveChanges();
+            }
+        }
         public void DivideRemainder(Budget budget)
         {
             budget.Percent = 1;

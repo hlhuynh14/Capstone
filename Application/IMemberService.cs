@@ -12,6 +12,7 @@ namespace Application
         void CalculateTaxableIncome(Tax tax, double deductions);
         void GetNetIncome(Budget budget);
         void  DeductBills(Budget budget);
+        void DeductGoals(Budget budget)
         void DivideRemainder(Budget budget);
         bool CheckPercent();
         void EstimateSavings(Goal goal);

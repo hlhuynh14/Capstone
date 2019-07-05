@@ -11,36 +11,31 @@
     <h4>Budget</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.member)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.member.Id)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.TotalMonthlyNetIncome)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.TotalMonthlyNetIncome)
         </dd>
+    </dl>
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.RemainderAfterBill)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.RemainderAfterBill)
         </dd>
+    </dl>
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.RemainderAfterGoals)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.RemainderAfterGoals)
         </dd>
+    </dl>
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Percent)
         </dt>
@@ -56,6 +51,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Calculate" asp-route-id="@Model.Id">Calculate</a>
 </div>
