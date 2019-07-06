@@ -1,19 +1,18 @@
 ﻿@model Domain.Budget
 
 @{
-    ViewData["Title"] = "SeeBudget";
+    ViewData["Title"] = "SeeBudget"; 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SeeBudget</h2>
+<h2>@Model.Name</h2>
 
 <div>
-    <h4>Budget</h4>
+ 
     <hr />
     <div>
+        <h3>Incomes</h3>
         <table class="table">
-
-
             <tr>
                 <th>
                     Name
@@ -42,12 +41,11 @@
             }
 
         </table>
-        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+        <a asp-action="CreateIncome" asp-route-id="@Model.Id">Create Income</a>
     </div>
     <div>
         <table class="table">
-
-
+            <h3>Bills</h3>
             <tr>
                 <th>
                     Name
@@ -60,7 +58,7 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.IncomeList)
+            @foreach (var item in Model.BillList)
             {
                 <tr>
                     <td>
@@ -70,7 +68,7 @@
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
                     <td>
-                        @Html.ActionLink("Update Income", "UpdateIncome", new { id = item.Id })
+                        @Html.ActionLink("Update Bill", "UpdateBill", new { id = item.Id })
                     </td>
                 </tr>
             }
@@ -80,51 +78,66 @@
     </div>
     <div>
         <table class="table">
-
-
+            <h3>Goals</h3>
             <tr>
                 <th>
                     Name
                 </th>
                 <th>
-                    Amount
+                    Saving
                 </th>
                 <th>
-
+                    Savings Per Month
+                </th>
+                <th>
+                    Goal
+                <th>
+                    Saving Per Month For Goal
                 </th>
             </tr>
 
-            @foreach (var item in Model.IncomeList)
+            @foreach (var item in Model.GoalList)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
+                        @Html.DisplayFor(modelItem => item.Savings)
                     </td>
                     <td>
-                        @Html.ActionLink("Update Income", "UpdateIncome", new { id = item.Id })
+                        @Html.DisplayFor(modelItem => item.SavingsPerMonth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SavingsTowardGoal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GoalSavingsPerMonth)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update Goal", "UpdateGoal", new { id = item.Id })
                     </td>
                 </tr>
             }
 
         </table>
-        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+        <a asp-action="CreateCoal" asp-route-id="@Model.Id">Create Goal</a>
     </div>
     <div>
+        <h3>Expenses</h3>
         <table class="table">
-
-
             <tr>
                 <th>
                     Name
                 </th>
                 <th>
+                    Percent
+                </th>
+                <th>
                     Amount
                 </th>
                 <th>
-
+                    
                 </th>
             </tr>
 
@@ -147,11 +160,9 @@
             }
 
         </table>
-        <a asp-action="CreateBill" asp-route-id="@Model.Id">Create Bill</a>
+        <a asp-action="CreateExpense" asp-route-id="@Model.Id">Create Expense</a>
     </div>
-
 </div>
-  
 <div>
     <a asp-action="Calculate" asp-route-id="@Model.Id">Calculate</a>
 </div>

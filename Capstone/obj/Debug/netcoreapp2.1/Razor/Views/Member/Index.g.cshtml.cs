@@ -184,7 +184,7 @@ using Capstone.Models;
             WriteLiteral("</div>\r\n    ");
             EndContext();
             BeginContext(1471, 72, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "62536825bd0e48e3abc5ca24c7bb512b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "61cbaad5993f403184fcc5e515301ae8", async() => {
                 BeginContext(1523, 16, true);
                 WriteLiteral("Calculate Budget");
                 EndContext();

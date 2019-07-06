@@ -62,12 +62,12 @@ using Capstone.Models;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(51, 3779, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ee26afdb62b417d84edd82c52fd201d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b1865265621c4031b09b616662085496", async() => {
                 BeginContext(57, 12, true);
                 WriteLiteral("\r\n\r\n        ");
                 EndContext();
                 BeginContext(69, 3748, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "11587f9ee40b4bde800f913455176324", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0017d01290ba41559675c4df20c166ad", async() => {
                     BeginContext(89, 3721, true);
                     WriteLiteral(@"
             <fieldset>
