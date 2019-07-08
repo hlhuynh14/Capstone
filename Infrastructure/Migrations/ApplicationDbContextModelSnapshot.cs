@@ -137,38 +137,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Expenses");
                 });
 
-            modelBuilder.Entity("Domain.FederalTax", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Amount");
-
-                    b.Property<double>("Bracket");
-
-                    b.Property<string>("FillingStatus");
-
-                    b.Property<double>("MarginalRate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FederalTaxes");
-                });
-
-            modelBuilder.Entity("Domain.FillingStatuses", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FillingStatus");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FillingStatuses");
-                });
-
             modelBuilder.Entity("Domain.Goal", b =>
                 {
                     b.Property<int>("Id")
@@ -176,10 +144,6 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("BudgetId");
-
-                    b.Property<double>("CurrentSavings");
-
-                    b.Property<DateTime>("DateChecker");
 
                     b.Property<double>("EstimatedHighLoan");
 
@@ -191,10 +155,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("GoalSavingsPerMonth");
 
-                    b.Property<DateTime>("GoalsDateChecker");
-
-                    b.Property<string>("GoalsName");
-
                     b.Property<double>("GoalsSavings");
 
                     b.Property<double>("InterestRate");
@@ -203,19 +163,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("MonthGoals");
 
-                    b.Property<int>("Months");
-
                     b.Property<string>("Name");
-
-                    b.Property<bool>("Savings");
-
-                    b.Property<double>("SavingsEstimated");
-
-                    b.Property<double>("SavingsPerMonth");
-
-                    b.Property<bool>("SavingsTowardGoal");
-
-                    b.Property<double>("TargetSavings");
 
                     b.HasKey("Id");
 
@@ -268,7 +216,13 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("Deductibles");
+
+                    b.Property<double>("EstimatedMontlyIncome");
+
                     b.Property<double>("EstimatedNetIncome");
+
+                    b.Property<double>("FederalTax");
 
                     b.Property<string>("FillingStatus");
 
@@ -281,6 +235,8 @@ namespace Infrastructure.Migrations
                     b.Property<double>("SocialSecurityTax");
 
                     b.Property<string>("StateAbbrevation");
+
+                    b.Property<double>("StateTax");
 
                     b.Property<double>("TaxableIncome");
 
@@ -467,7 +423,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Tax", b =>
                 {
-                    b.HasOne("Domain.Member", "member")
+                    b.HasOne("Domain.Member", "Member")
                         .WithMany("TaxList")
                         .HasForeignKey("MemberId");
                 });

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "d0497214f845b0c40b1ce17b3e8c425c70665d8e"
+    "signature": "61adb213886346685a7e935cefffd6ec4d78f9bc"
   },
   "compilationOptions": {
     "defines": [
@@ -28,7 +28,8 @@
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9",
+          "System-Web-Helpers.dll": "1.0.0"
         },
         "runtime": {
           "Capstone.dll": {}
@@ -463,6 +464,17 @@
         },
         "compile": {
           "lib/netstandard1.0/Remotion.Linq.dll": {}
+        }
+      },
+      "System-Web-Helpers.dll/1.0.0": {
+        "runtime": {
+          "lib/Net40/System.Web.Helpers.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/Net40/System.Web.Helpers.dll": {}
         }
       },
       "System.Collections.Immutable/1.5.0": {},
@@ -3706,6 +3718,13 @@
       "sha512": "sha512-fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "path": "remotion.linq/2.2.0",
       "hashPath": "remotion.linq.2.2.0.nupkg.sha512"
+    },
+    "System-Web-Helpers.dll/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YNi625gkYOPE1CN6HdDGW4Ve7/E4xxnBGsnTBdzz91b+Pk0WrE2hPPOrXJc9vTjW2PjRju0TeyUZYtBntYXuVA==",
+      "path": "system-web-helpers.dll/1.0.0",
+      "hashPath": "system-web-helpers.dll.1.0.0.nupkg.sha512"
     },
     "System.Collections.Immutable/1.5.0": {
       "type": "package",

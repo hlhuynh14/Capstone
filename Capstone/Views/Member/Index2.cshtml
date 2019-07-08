@@ -1,0 +1,221 @@
+﻿@model Domain.Member
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/MemberLayout.cshtml";
+}
+
+
+
+<div>
+    <h2>@Model.FirstName @Model.LastName ' s Home Page</h2>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+
+
+                <h3>Budget (In Dollars)</h3>
+                @foreach (var item in Model.BudgetList)
+                {
+                    <dl class="dl-horizontal">
+
+                        <dt>
+                            @Html.DisplayNameFor(modelItem => item.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </dd>
+                        <dt>
+                            Total Monthly Income:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.TotalMonthlyNetIncome)
+                        </dd>
+                        <dt>
+                            After Bills:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.RemainderAfterBill)
+                        </dd>
+                        <dt>
+                            After Saving:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.RemainderAfterGoals)
+                        </dd>
+                        <dt>
+                            Remainder:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.RemainderAfterExpenses)
+                        </dd>
+                    </dl>
+                }
+            </div>
+
+            <div class="col-md-4">
+
+                <div id="chart2"></div>
+            </div>
+
+
+
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+<div>
+
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+
+
+                <h3>Taxes (In Dollars)</h3>
+                @foreach (var item in Model.TaxList)
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Gross Income:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.GrossIncome)
+                        </dd>
+                        <dt>
+                            Deductions:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.Deductibles)
+                        </dd>
+                        <dt>
+                            Taxable Income:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.TaxableIncome)
+                        </dd>
+                        <dt>
+                            Federal Tax:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.FederalTax)
+                        </dd>
+                        <dt>
+                            State Tax:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.StateTax)
+                        </dd>
+                        <dt>
+                            Medicare Tax:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.MedicareTax)
+                        </dd>
+                        <dt>
+                            Social Security Tax:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.SocialSecurityTax)
+                        </dd>
+                        <dt>
+                            Estimated Net Income:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.EstimatedNetIncome)
+                        </dd>
+                        <dt>
+                            Monthly Income:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(modelItem => item.EstimatedMontlyIncome)
+                        </dd>
+                    </dl>
+                }
+
+            </div>
+            <div class="col-md-4">
+
+                <div id="chart5"></div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        
+        function drawChart() {
+
+            let bills = @Model.BudgetList[0].TotalMonthlyNetIncome - @Model.BudgetList[0].RemainderAfterBill;
+            let goals = @Model.BudgetList[0].RemainderAfterBill - @Model.BudgetList[0].RemainderAfterGoals;
+            let expenses = @Model.BudgetList[0].RemainderAfterBill - @Model.BudgetList[0].RemainderAfterExpenses;
+            let remainder = @Model.BudgetList[0].RemainderAfterExpenses;
+            let deductions = @Model.TaxList[0].Deductibles;
+            let federalTax = @Model.TaxList[0].FederalTax;
+            let stateTax = @Model.TaxList[0].StateTax;
+            let medicareTax = @Model.TaxList[0].MedicareTax;
+            let socialSecurityTax = @Model.TaxList[0].SocialSecurityTax;
+             let netIncome = @Model.TaxList[0].EstimatedNetIncome;
+
+
+            
+           var data2 = google.visualization.arrayToDataTable([
+          ['Expenses', 'Amount'],
+          ['Bills', bills],
+          ['Goals',      goals],
+          ['Expenses',  expenses],
+          ['Remainder', remainder],
+        ]);
+
+    
+           var data = google.visualization.arrayToDataTable([
+          ['Taxes', 'Amount'],
+          ['Deductions', deductions],
+          ['Federal Tax',      federalTax],
+          ['State Tax',  stateTax],
+          ['Medicare Tax', medicareTax],
+          ['Social Security Tax', socialSecurityTax],
+          ['Net Income',  netIncome],
+        ]);
+
+            var option = {
+                title: 'Budget Pie Chart',
+                width: 400,
+                height: 250
+            };
+
+        var option2 = {
+                title: 'Taxes Pie Chart',
+                width: 400,
+                height: 300
+            };
+
+
+
+      
+        option.is3D = true;
+            chart = new google.visualization.PieChart(document.getElementById('chart2'));
+            chart.draw(data2, option);
+
+        
+            option.is3D = true;
+            chart = new google.visualization.PieChart(document.getElementById('chart5'));
+            chart.draw(data, option2);
+
+
+        }
+    </script>
+}

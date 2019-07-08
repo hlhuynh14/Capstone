@@ -1,0 +1,43 @@
+﻿@model Domain.Tax
+
+@{
+    ViewData["Title"] = "UpdateTax";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update Tax</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateTax">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FillingStatus" class="control-label"></label>
+                <input asp-for="FillingStatus" class="form-control" />
+                <span asp-validation-for="FillingStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StateAbbrevation" class="control-label"></label>
+                <input asp-for="StateAbbrevation" class="form-control" />
+                <span asp-validation-for="StateAbbrevation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrossIncome" class="control-label"></label>
+                <input asp-for="GrossIncome" class="form-control" />
+                <span asp-validation-for="GrossIncome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

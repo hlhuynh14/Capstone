@@ -1,0 +1,74 @@
+﻿@model Domain.Tax
+
+@{
+    ViewData["Title"] = "SeeTax";
+     Layout = "~/Views/Shared/MemberLayout.cshtml";
+}
+
+
+
+<div>
+    <h4> My Taxes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Filling Status:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FillingStatus)
+        </dd>
+        <dt>
+            State:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StateAbbrevation)
+        </dd>
+        <dt>
+           Gross Income:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GrossIncome)
+        </dd>
+        <dt>
+           Taxable Income:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxableIncome)
+        </dd>
+        <dt>
+            Federal Tax:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FederalTax)
+        </dd>
+        <dt>
+           State Tax:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StateTax)
+        </dd>
+        <dt>
+            Medicare Tax:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MedicareTax)
+        </dd>
+        <dt>
+            Social Security Tax:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SocialSecurityTax)
+        </dd>
+        <dt>
+           Estimated Net Income:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedNetIncome)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="UpdateTax" asp-route-id="@Model.Id">Update Your Tax</a> |
+    <a asp-action="DeleteTax" asp-route-id="@Model.Id">Delete Your Tax</a> 
+
+</div>
